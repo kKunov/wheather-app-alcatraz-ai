@@ -34,11 +34,13 @@ router.get('/forecastBy3Hours', async ctx => {
 
     weather.list.forEach(w => {
         let dt = moment(w.dt_txt, "YYYY-MM-DD HH:mm:ss");
+        let dtPlus3H = moment(dt);
+        dtPlus3H.add(3, 'h');
 
         let day = days.filter(d => d.name === daysOfWeek[dt.day()]);
         
         w.dtFromFormated = dt.format("HH") + "h";
-        w.dtToFormated = dt.add(3, 'h').format("HH") + "h";
+        w.dtToFormated = dtPlus3H.format("HH") + "h";
         
         w.main.temp_min = Math.round(parseFloat(w.main.temp_min));
         w.main.temp_max = Math.round(parseFloat(w.main.temp_max));
@@ -52,7 +54,7 @@ router.get('/forecastBy3Hours', async ctx => {
                 list: [w],
                 name: daysOfWeek[dt.day()],
                 formated: daysOfWeek[dt.day()] + ", " + dt.format("Do MMM")
-            })
+            });
         }
     });
 
