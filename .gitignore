@@ -1,2 +1,6 @@
-﻿node_modules
-package-lock.json
+﻿node/node_modules
+client/node_modules
+node/package-lock.json
+client/package-lock.json
+node/openWeatherClientId.txt
+client/package-lock.json
